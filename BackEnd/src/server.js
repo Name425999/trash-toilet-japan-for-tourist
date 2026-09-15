@@ -71,6 +71,11 @@ app.use("/api/places", placeRoutes);
 app.use("/api/reports", reportRoutes);
 // ติดตั้ง Middleware หรือ Route ให้ Express ตามลำดับจากบนลงล่าง
 
+app.get("/api/health", (req, res) => {
+// Railway ใช้ Endpoint นี้ตรวจว่า Service พร้อมรับ Request
+  res.status(200).json({ status: "ok" });
+});
+
 app.use((error, req, res, next) => {
 // รับ error จาก Multer เช่น ไฟล์ใหญ่เกิน 5 MB หรือไม่ใช่รูปภาพ
   if (error) {

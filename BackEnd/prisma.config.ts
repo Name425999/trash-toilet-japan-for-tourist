@@ -7,6 +7,6 @@ export default defineConfig({
     path: "prisma/migrations", // Prisma จะสร้างไฟล์ Migration ไว้ใน path นี้
   },
   datasource: { // ส่ง Connection URL จาก Environment ให้ Prisma CLI
-    url: process.env["DATABASE_URL"], // URL มี user, password, host, port และชื่อ Database
+    url: process.env["DATABASE_URL"] || process.env["MYSQL_URL"], // Railway MySQL ใช้ MYSQL_URL
   },
 });

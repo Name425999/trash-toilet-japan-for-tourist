@@ -1,0 +1,16 @@
+.git
+.gitignore
+.agents
+.claude
+.windsurf
+.tmp-heif
+**/node_modules
+**/.env
+**/.env.*
+!**/.env.example
+**/dist
+**/*.log
+output
+outputs
+tmp
+OBS Recordings

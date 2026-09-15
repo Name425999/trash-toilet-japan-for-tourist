@@ -1,8 +1,10 @@
 import axios from "axios";
 // ลำดับอ่าน Frontend 6: Axios ตัวกลางที่ทุก Page ใช้เรียก Backend | Interceptor นำ JWT ไปใส่ Authorization ให้อัตโนมัติ
 
-const apiUrl = import.meta.env.VITE_API_URL || "http://localhost:3000/api";
-// อ่าน URL จาก Environment และใช้ localhost เป็นค่าเริ่มต้นตอนพัฒนา
+const apiUrl =
+  import.meta.env.VITE_API_URL ||
+  (import.meta.env.PROD ? "/api" : "http://localhost:3000/api");
+// Production ใช้ URL เดียวกับหน้าเว็บ ส่วน Development ใช้ Backend ในเครื่อง
 
 const api = axios.create({ baseURL: apiUrl });
 // ทุก Page import instance นี้ จึงไม่ต้องเขียน Base URL ซ้ำ

@@ -109,3 +109,21 @@ npm run dev
 
 สมัครสมาชิกจากหน้า Register ก่อน จากนั้นรัน `npx prisma studio` ในโฟลเดอร์ `BackEnd` แล้วเปลี่ยนค่า `role` ของบัญชีนั้นจาก `member` เป็น `admin`.
 
+## Deploy Live Demo บน Railway
+
+โปรเจกต์มี `Dockerfile` สำหรับ Build Frontend และ Backend เป็น Service เดียว โดย
+Express จะเสิร์ฟไฟล์จาก `FrontEnd/dist` และใช้ `/api` บน Domain เดียวกัน
+
+1. สร้าง Railway Project จาก GitHub repository นี้
+2. เพิ่ม MySQL service ใน Project เดียวกัน
+3. ที่ App service ให้ตั้ง Reference Variables จาก MySQL service:
+   `MYSQL_URL`, `MYSQLHOST`, `MYSQLPORT`, `MYSQLUSER`, `MYSQLPASSWORD` และ
+   `MYSQLDATABASE`
+4. เพิ่ม `JWT_SECRET` เป็นข้อความสุ่มที่ยาวและคาดเดายาก
+5. สร้าง Public Domain ให้ App service แล้วตั้ง `FRONTEND_URL` เป็น Domain นั้น
+6. ตั้ง Health Check Path เป็น `/api/health`
+7. แนบ Railway Volume กับ App service ที่ `/app/BackEnd/uploads` เพื่อให้รูปที่
+   ผู้ใช้อัปโหลดไม่หายเมื่อ Redeploy
+
+Container จะรัน `prisma db push` ก่อนเปิด Server เพื่อสร้างตารางในฐานข้อมูลของ
+Live Demo โดยอัตโนมัติ
