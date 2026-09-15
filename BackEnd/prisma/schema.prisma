@@ -4,7 +4,7 @@ generator client { // ลำดับอ่าน 6: อ่านไฟล์น
 }
 
 datasource db {
-  provider = "mysql" // MariaDB ใช้ connector เดียวกับ MySQL
+  provider = "postgresql" // Production demo ใช้ PostgreSQL บน Neon Free
 }
 
 enum UserRole {

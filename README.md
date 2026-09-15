@@ -12,7 +12,7 @@
 → Zod Validation
 → Controller
 → Prisma
-→ MariaDB
+→ PostgreSQL
 → JSON กลับ Axios
 → React อัปเดตหน้าจอ
 ```
@@ -22,13 +22,13 @@
 ### 1. ติดตั้งโปรแกรมที่จำเป็น
 
 - [Node.js](https://nodejs.org/) รุ่น LTS
-- MariaDB หรือ MySQL
+- PostgreSQL
 - Git
 
 ### 2. Clone โปรเจกต์และติดตั้ง Dependencies
 
 ```powershell
-git clone https://github.com/Name4239/trash-toilet-japan-for-tourist.git
+git clone https://github.com/Name425999/trash-toilet-japan-for-tourist.git
 cd trash-toilet-japan-for-tourist
 
 cd BackEnd
@@ -45,9 +45,8 @@ Copy-Item BackEnd/.env.example BackEnd/.env
 Copy-Item FrontEnd/.env.example FrontEnd/.env
 ```
 
-แก้ `BackEnd/.env` ให้ตรงกับฐานข้อมูลของเครื่อง โดยเฉพาะ `DATABASE_URL`,
-`DATABASE_USER`, `DATABASE_PASSWORD`, `DATABASE_NAME` และตั้ง `JWT_SECRET`
-เป็นข้อความสุ่มที่ยาวและคาดเดายาก
+แก้ `BackEnd/.env` โดยใส่ PostgreSQL connection string ใน `DATABASE_URL`
+และตั้ง `JWT_SECRET` เป็นข้อความสุ่มที่ยาวและคาดเดายาก
 
 Frontend ควรเชื่อมต่อ Backend ด้วยค่านี้:
 
@@ -57,7 +56,7 @@ VITE_API_URL=http://localhost:3000/api
 
 ### 4. เตรียมฐานข้อมูล
 
-สร้างฐานข้อมูล MariaDB/MySQL ตามชื่อที่กำหนดใน `BackEnd/.env` แล้วรัน:
+สร้างฐานข้อมูล PostgreSQL ตามชื่อที่กำหนดใน `BackEnd/.env` แล้วรัน:
 
 ```powershell
 cd BackEnd
@@ -109,21 +108,18 @@ npm run dev
 
 สมัครสมาชิกจากหน้า Register ก่อน จากนั้นรัน `npx prisma studio` ในโฟลเดอร์ `BackEnd` แล้วเปลี่ยนค่า `role` ของบัญชีนั้นจาก `member` เป็น `admin`.
 
-## Deploy Live Demo บน Railway
+## Deploy Live Demo แบบฟรีด้วย Render + Neon
 
 โปรเจกต์มี `Dockerfile` สำหรับ Build Frontend และ Backend เป็น Service เดียว โดย
 Express จะเสิร์ฟไฟล์จาก `FrontEnd/dist` และใช้ `/api` บน Domain เดียวกัน
 
-1. สร้าง Railway Project จาก GitHub repository นี้
-2. เพิ่ม MySQL service ใน Project เดียวกัน
-3. ที่ App service ให้ตั้ง Reference Variables จาก MySQL service:
-   `MYSQL_URL`, `MYSQLHOST`, `MYSQLPORT`, `MYSQLUSER`, `MYSQLPASSWORD` และ
-   `MYSQLDATABASE`
-4. เพิ่ม `JWT_SECRET` เป็นข้อความสุ่มที่ยาวและคาดเดายาก
-5. สร้าง Public Domain ให้ App service แล้วตั้ง `FRONTEND_URL` เป็น Domain นั้น
-6. ตั้ง Health Check Path เป็น `/api/health`
-7. แนบ Railway Volume กับ App service ที่ `/app/BackEnd/uploads` เพื่อให้รูปที่
-   ผู้ใช้อัปโหลดไม่หายเมื่อ Redeploy
+1. สร้างฐานข้อมูล PostgreSQL บน Neon Free และคัดลอก pooled connection string
+2. ที่ Render เลือก New > Blueprint แล้วเชื่อม GitHub repository นี้
+3. ใส่ pooled connection string ในตัวแปร `DATABASE_URL`
+4. Render จะสร้าง `JWT_SECRET` ให้อัตโนมัติจาก `render.yaml`
+5. หลัง Deploy สำเร็จ เปิด `/api/health` เพื่อตรวจสอบระบบ
 
 Container จะรัน `prisma db push` ก่อนเปิด Server เพื่อสร้างตารางในฐานข้อมูลของ
-Live Demo โดยอัตโนมัติ
+Live Demo โดยอัตโนมัติ Render Free จะพัก Service หลังไม่มีคนเข้า 15 นาที จึงอาจ
+ใช้เวลาประมาณหนึ่งนาทีในการเปิดครั้งแรก และไฟล์รูปที่อัปโหลดเป็นไฟล์ชั่วคราว
+ซึ่งอาจหายเมื่อ Service restart หรือ redeploy
