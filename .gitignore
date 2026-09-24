@@ -32,3 +32,7 @@ Thumbs.db
 *.doc
 *.docx
 docs/
+
+# Publish repository README files
+!README.md
+!FrontEnd/README.md
