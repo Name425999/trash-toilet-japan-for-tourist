@@ -24,3 +24,11 @@ tmp/
 .vscode/
 .DS_Store
 Thumbs.db
+
+# Project guides and documentation (keep local only)
+*.md
+*.mdx
+*.pdf
+*.doc
+*.docx
+docs/
