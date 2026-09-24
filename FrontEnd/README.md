@@ -4,8 +4,8 @@
 
 | สิทธิ์ | อีเมล | รหัสผ่าน |
 | --- | --- | --- |
-| User | `demo.user@example.com` | `DemoUser2026!` |
-| Admin | `demo.admin@example.com` | `DemoAdmin2026!` |
+| User | `demo.user@example.com` | `DemoUser!Japan` |
+| Admin | `demo.admin@example.com` | `DemoAdmin!Japan` |
 
 บัญชีนี้ใช้เฉพาะฐานข้อมูล Demo เท่านั้น หน้า Login มีปุ่มกรอกข้อมูลทั้งสองบัญชีให้อัตโนมัติ
 

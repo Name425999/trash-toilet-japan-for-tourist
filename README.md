@@ -6,8 +6,8 @@
 
 | สิทธิ์ | อีเมล | รหัสผ่าน |
 | --- | --- | --- |
-| User | `demo.user@example.com` | `DemoUser2026!` |
-| Admin | `demo.admin@example.com` | `DemoAdmin2026!` |
+| User | `demo.user@example.com` | `DemoUser!Japan` |
+| Admin | `demo.admin@example.com` | `DemoAdmin!Japan` |
 
 หน้าเข้าสู่ระบบมีปุ่มกรอกบัญชี Demo ให้อัตโนมัติ ข้อมูลบนแผนที่เป็นข้อมูลจำลองและพิกัดโดยประมาณ ไม่ใช่ฐานข้อมูลสถานที่อย่างเป็นทางการ
 
@@ -18,7 +18,7 @@ cd BackEnd
 npm run seed:demo
 ```
 
-คำสั่ง seed รันซ้ำได้โดยไม่เพิ่มบัญชี สถานที่ หรือรายงานซ้ำ สำหรับ Render จะรันอัตโนมัติเมื่อกำหนด `DEMO_SEED_ENABLED=true`
+คำสั่ง seed รันซ้ำได้โดยไม่เพิ่มบัญชี สถานที่ หรือรายงานซ้ำ สำหรับ Render จะรันอัตโนมัติทุกครั้งก่อนเปิด Server
 
 ## Flow ทั้งระบบ
 

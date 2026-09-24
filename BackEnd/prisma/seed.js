@@ -6,13 +6,13 @@ const DEMO_USERS = {
   admin: {
     name: "Demo Admin",
     email: "demo.admin@example.com",
-    password: "DemoAdmin2026!",
+    password: "DemoAdmin!Japan",
     role: "admin",
   },
   member: {
     name: "Demo User",
     email: "demo.user@example.com",
-    password: "DemoUser2026!",
+    password: "DemoUser!Japan",
     role: "member",
   },
 };

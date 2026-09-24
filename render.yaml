@@ -13,5 +13,3 @@ services:
         sync: false
       - key: JWT_SECRET
         generateValue: true
-      - key: DEMO_SEED_ENABLED
-        value: true

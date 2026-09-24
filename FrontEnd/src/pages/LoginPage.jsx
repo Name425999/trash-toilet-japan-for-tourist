@@ -11,8 +11,8 @@ import useAuth from "../hooks/useAuth.js";
 import { getErrorMessage } from "../services/api.js";
 
 const demoAccounts = [
-  { label: "ทดลองเป็น User", email: "demo.user@example.com", password: "DemoUser2026!" },
-  { label: "ทดลองเป็น Admin", email: "demo.admin@example.com", password: "DemoAdmin2026!" },
+  { label: "ทดลองเป็น User", email: "demo.user@example.com", password: "DemoUser!Japan" },
+  { label: "ทดลองเป็น Admin", email: "demo.admin@example.com", password: "DemoAdmin!Japan" },
 ];
 // นำ Dependency หรือ Module ที่บรรทัดถัดไปต้องใช้เข้ามาในไฟล์
 
