@@ -10,10 +10,6 @@ import useAuth from "../hooks/useAuth.js";
 // นำ Dependency หรือ Module ที่บรรทัดถัดไปต้องใช้เข้ามาในไฟล์
 import { getErrorMessage } from "../services/api.js";
 
-const demoAccounts = [
-  { label: "ทดลองเป็น User", email: "demo.user@example.com", password: "DemoUser!Japan" },
-  { label: "ทดลองเป็น Admin", email: "demo.admin@example.com", password: "DemoAdmin!Japan" },
-];
 // นำ Dependency หรือ Module ที่บรรทัดถัดไปต้องใช้เข้ามาในไฟล์
 
 export default function LoginPage() {
@@ -66,22 +62,6 @@ export default function LoginPage() {
         <h2 className="text-2xl font-bold">ยินดีต้อนรับ</h2>
         <p className="text-sm text-stone-500">เข้าสู่ระบบก่อนเริ่มค้นหาสถานที่</p>
         {/* Form นี้เป็น Controlled Form ค่าอยู่ใน form State */}
-        <div className="mt-4 rounded-2xl border border-orange-200 bg-orange-50/90 p-3">
-          <p className="text-xs font-semibold text-brand-dark">บัญชีสำหรับทดลอง Live Demo</p>
-          <div className="mt-2 grid grid-cols-2 gap-2">
-            {demoAccounts.map((account) => (
-              <button
-                className="rounded-xl border border-orange-200 bg-white px-2 py-2 text-xs font-semibold text-brand transition hover:bg-orange-100"
-                key={account.email}
-                onClick={() => setForm({ email: account.email, password: account.password })}
-                type="button"
-              >
-                {account.label}
-              </button>
-            ))}
-          </div>
-          <p className="mt-2 text-[11px] text-stone-500">กดเพื่อกรอกอีเมลและรหัสผ่านอัตโนมัติ</p>
-        </div>
         <form className="mt-4 space-y-4" onSubmit={handleSubmit}>
           <Field label="อีเมล" type="email" placeholder="name@example.com" value={form.email} onChange={(e) => setForm({ ...form, email: e.target.value })} />
           <Field label="รหัสผ่าน" type="password" placeholder="อย่างน้อย 6 ตัวอักษร" value={form.password} onChange={(e) => setForm({ ...form, password: e.target.value })} />
