@@ -2,6 +2,8 @@ import "dotenv/config";
 import bcrypt from "bcrypt";
 import { prisma } from "../src/lib/prisma.js";
 
+import { seedCentralDemoPlaces } from "./centralDemoPlaces.js";
+
 const DEMO_USERS = {
   admin: {
     name: "Demo Admin",
@@ -66,6 +68,9 @@ async function seed() {
   for (const place of DEMO_PLACES) {
     places.push(await upsertDemoPlace(place, place.status === "pending" ? member.id : admin.id));
   }
+
+  const regional = await seedCentralDemoPlaces(prisma, admin.id);
+  console.log(`Central Thailand demo: ${regional.total} places (${regional.created} new).`);
 
   const demoReports = [
     { place: places[0], reason: "เวลาปิดไม่ตรงกับข้อมูล", description: "รายงานตัวอย่างสำหรับทดลองขั้นตอนตรวจสอบ", status: "pending" },

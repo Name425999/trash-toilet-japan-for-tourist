@@ -1,4 +1,4 @@
-import { LoaderCircle, LocateFixed } from "lucide-react";
+import { LocateFixed } from "lucide-react";
 // หน้าแรกหลัง Login: โหลด Place active แล้วส่งให้ PlaceMap วาด Marker | react-geolocated อ่านตำแหน่งจริงเพื่อให้แผนที่ตามผู้ใช้
 import { useEffect, useState } from "react";
 // นำ Dependency หรือ Module ที่บรรทัดถัดไปต้องใช้เข้ามาในไฟล์
@@ -48,26 +48,7 @@ export default function MapHomePage() {
   // ส่งผลลัพธ์ออกจากฟังก์ชันและหยุดทำบรรทัดถัดไปในฟังก์ชันนี้
     <div className="relative h-[calc(100vh-4rem)] min-h-[620px] overflow-hidden md:h-[calc(100vh-7rem)]">
       <div className="absolute inset-0 bg-cream-100">
-        {/* ยังไม่มี GPS จะแสดง Loading/Error แทนการสร้าง Map ด้วย center ว่าง */}
-        {position ? (
-          <PlaceMap places={places} position={position} />
-        ) : (
-          <div className="grid h-full place-items-center px-8 text-center text-stone-500">
-            <div>
-              {!positionError && (
-                <LoaderCircle className="mx-auto mb-3 animate-spin text-brand" size={32} />
-              )}
-              <p className="font-semibold text-ink">
-                {positionError ? "ไม่สามารถอ่านตำแหน่งได้" : "กำลังหาตำแหน่งของคุณ..."}
-              </p>
-              <p className="mt-1 text-sm">
-                {positionError
-                  ? "กรุณาเปิด GPS และอนุญาต Location แล้วลองอีกครั้ง"
-                  : "แผนที่จะเปิดบริเวณใกล้คุณโดยอัตโนมัติ"}
-              </p>
-            </div>
-          </div>
-        )}
+        <PlaceMap places={places} position={position} fitPlaces={!position} />
       </div>
       {/* กล่อง Filter ลอยเหนือแผนที่ */}
       <div className="absolute inset-x-4 top-4 z-[800] rounded-2xl bg-white/95 p-3 text-ink shadow-lg backdrop-blur dark:bg-[#302d29]/95 dark:text-[#f0e9df]">
@@ -75,7 +56,7 @@ export default function MapHomePage() {
         <div className="mt-3 flex justify-center gap-2"><Chip active={!type} onClick={() => setType("")}>ทั้งหมด</Chip><Chip active={type === "toilet"} onClick={() => setType("toilet")}>ห้องน้ำ</Chip><Chip active={type === "trash"} onClick={() => setType("trash")}>ถังขยะ</Chip></div>
       </div>
       <button className="absolute bottom-5 left-1/2 z-[800] flex -translate-x-1/2 items-center gap-2 rounded-full bg-white px-5 py-3 font-semibold text-brand shadow-lg" onClick={getPosition}><LocateFixed size={19} />{position ? "ตำแหน่งปัจจุบัน" : "เปิด GPS"}</button>
-      {(!isGeolocationAvailable || !isGeolocationEnabled) && <p className="absolute bottom-20 left-1/2 z-[800] w-72 -translate-x-1/2 rounded-xl bg-white p-2 text-center text-xs text-danger shadow">กรุณาเปิด GPS และอนุญาตตำแหน่ง</p>}
+      {(positionError || !isGeolocationAvailable || !isGeolocationEnabled) && <p className="absolute bottom-20 left-1/2 z-[800] w-72 -translate-x-1/2 rounded-xl bg-white p-2 text-center text-xs text-danger shadow">กำลังแสดงภาพรวมภาคกลาง · เปิด GPS เพื่อดูใกล้คุณ</p>}
     </div>
   );
 }
